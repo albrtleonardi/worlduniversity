@@ -69,7 +69,7 @@ const Home = () => {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-10 md:mt-0 md:space-x-8">
+      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-10 md:mt-8 md:space-x-8">
         <div className="flex flex-col justify-center items-start">
           <h1 className="font-semibold font-poppins text-4xl mb-4">
             Our History
@@ -159,7 +159,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-16 md:mt-0 md:space-x-8">
+      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-16 md:mt-8 mb-12 md:space-x-8">
         <div className="flex flex-col justify-center items-center">
           <h1 className="font-semibold font-poppins text-4xl mb-4">
             Who We Are
