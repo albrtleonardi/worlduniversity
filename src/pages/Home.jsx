@@ -103,7 +103,7 @@ const Home = () => {
       </div>
 
       <div className="flex flex-col md:space-y-4 space-y-2 justify-center items-center w-full h-20 bg-white mt-10">
-        <h2 className="text-sm md:text-xl font-poppins font-normal">
+        <h2 className="text-sm md:text-xl md:w-full w-[70%] font-poppins font-normal text-center">
           Do you know? There are{" "}
           <span className="font-bold">{totalOfTheCountries}+</span> countries in
           this big world
