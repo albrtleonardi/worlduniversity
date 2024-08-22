@@ -16,11 +16,11 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex">
-      {/* Sidebar Toggle Button */}
+    <div className="relative z-50">
+      {/* Burger Button */}
       <button
         onClick={toggleSidebar}
-        className={`p-4 fixed top-0 left-0 z-20 lg:hidden transform ${
+        className={`p-4 fixed top-0 left-0 z-50 lg:hidden transform ${
           isOpen ? "text-white" : "text-[#1A202C]"
         }`}
       >
@@ -29,7 +29,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`h-screen w-64 bg-[#1A202C] text-white flex flex-col justify-between p-4 fixed top-0 left-0 z-10 transform ${
+        className={`h-screen w-64 bg-[#1A202C] text-white flex flex-col justify-between p-4 fixed top-0 left-0 z-40 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 lg:translate-x-0 lg:static`}
       >
@@ -81,10 +81,11 @@ const Sidebar = () => {
         </div>
       </div>
 
+      {/* Overlay */}
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="fixed inset-0 bg-black opacity-50 z-5 lg:hidden"
+          className="fixed inset-0 bg-black opacity-50 z-30 lg:hidden"
         ></div>
       )}
     </div>
