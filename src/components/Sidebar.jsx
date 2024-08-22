@@ -17,7 +17,6 @@ const Sidebar = () => {
 
   return (
     <div className="relative z-50">
-      {/* Burger Button */}
       <button
         onClick={toggleSidebar}
         className={`p-4 fixed top-0 left-0 z-50 lg:hidden transform ${
@@ -27,7 +26,6 @@ const Sidebar = () => {
         {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </button>
 
-      {/* Sidebar */}
       <div
         className={`h-screen w-64 bg-[#1A202C] text-white flex flex-col justify-between p-4 fixed top-0 left-0 z-40 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -43,8 +41,11 @@ const Sidebar = () => {
           <Link to="/" className="hover:bg-gray-700 p-2 rounded">
             Home
           </Link>
-          <Link to="/search" className="hover:bg-gray-700 p-2 rounded">
-            Country
+          <Link to="/searchcountry" className="hover:bg-gray-700 p-2 rounded">
+            Country Search
+          </Link>
+          <Link to="/filtercountry" className="hover:bg-gray-700 p-2 rounded">
+            Country Filter
           </Link>
           <Link to="/about" className="hover:bg-gray-700 p-2 rounded">
             About
@@ -81,7 +82,6 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Overlay */}
       {isOpen && (
         <div
           onClick={toggleSidebar}

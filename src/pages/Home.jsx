@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const [totalOfTheCountries, setTotalOfTheCountries] = useState(0);
@@ -181,9 +182,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center w-full h-auto text-white bg-[#1A202C] font-poppins font-light pt-4 pb-4 text-sm">
-        <h2>Copyright © 2024 WorldUniversity</h2>
-      </div>
+      <Footer />
     </div>
   );
 };
