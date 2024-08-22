@@ -31,7 +31,7 @@ const Home = () => {
     "https://images.unsplash.com/photo-1531975474574-e9d2732e8386?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://plus.unsplash.com/premium_photo-1676657955507-b1f993556e80?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1531737212413-667205e1cda7?q=80&w=3016&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1509195070461-b99ef33ceb67?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
   return (
@@ -103,7 +103,7 @@ const Home = () => {
       </div>
 
       <div className="flex flex-col md:space-y-4 space-y-2 justify-center items-center w-full h-20 bg-white mt-10">
-        <h2 className="text-base md:text-xl font-poppins font-normal">
+        <h2 className="text-sm md:text-xl font-poppins font-normal">
           Do you know? There are{" "}
           <span className="font-bold">{totalOfTheCountries}+</span> countries in
           this big world
