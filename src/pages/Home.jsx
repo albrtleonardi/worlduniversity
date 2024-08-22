@@ -35,13 +35,13 @@ const Home = () => {
   ];
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <div className="relative h-screen w-full">
         <div
-          className="absolute w-[24rem] md:w-96 left-auto right-0 md:right-16
+          className="absolute w-[16rem] md:w-96 left-auto right-0 md:right-16
          bg-white p-6"
         >
-          <h1 className="text-3xl font-semibold mb-2 font-poppins">
+          <h1 className="md:text-3xl text-2xl font-semibold mb-2 font-poppins">
             Explore the World’s Countries with WorldUniversity
           </h1>
           <div className="w-16 h-1 mb-2 bg-[#1A202C]"></div>
@@ -184,7 +184,7 @@ const Home = () => {
       <div className="flex justify-center items-center w-full h-auto text-white bg-[#1A202C] font-poppins font-light pt-4 pb-4 text-sm">
         <h2>Copyright © 2024 WorldUniversity</h2>
       </div>
-    </>
+    </div>
   );
 };
 
