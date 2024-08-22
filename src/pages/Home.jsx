@@ -63,7 +63,7 @@ const Home = () => {
         </div>
 
         <img
-          src="https://images.unsplash.com/photo-1509299349698-dd22323b5963?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1460722665083-c2599113f7e0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Scenic Mountain"
           className="object-cover w-full h-full"
         />
@@ -159,7 +159,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-16 md:mt-8 mb-12 md:space-x-8">
+      <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-16 md:mt-12 mb-12 md:space-x-8">
         <div className="flex flex-col justify-center items-center">
           <h1 className="font-semibold font-poppins text-4xl mb-4">
             Who We Are
