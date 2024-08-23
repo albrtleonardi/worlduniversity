@@ -194,7 +194,7 @@ const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
           </select>
           <button
             onClick={resetAllFilters}
-            className="p-2 w-1/4 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="p-2 w-1/4 bg-black text-white rounded "
           >
             Clear Filters
           </button>
