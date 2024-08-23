@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Skeleton from "react-loading-skeleton";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Link } from "react-router-dom";
+// Skeletal effectnya gak jalan T^T
 
-const CountryGrid = ({ searchActive, searchResults }) => {
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+
+const CountryGrid = () => {
   const [countries, setCountries] = useState([]);
   const [visibleCountries, setVisibleCountries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const observer = useRef();
 
   useEffect(() => {
     fetchCountries();
@@ -18,32 +21,81 @@ const CountryGrid = ({ searchActive, searchResults }) => {
       const response = await fetch("https://restcountries.com/v3.1/all");
       const data = await response.json();
       setCountries(data);
-      setVisibleCountries(data.slice(0, 9));
-      setLoading(false);
+      setVisibleCountries(data.slice(0, 27));
     } catch (error) {
       console.error("Error fetching countries:", error);
+    } finally {
       setLoading(false);
     }
   };
 
-  const loadMoreCountries = () => {
-    if (loading || visibleCountries.length >= countries.length) return;
-    setLoading(true);
+  const loadMoreCountries = useCallback(() => {
+    if (loadingMore || visibleCountries.length >= countries.length) return;
+    setLoadingMore(true);
     const start = visibleCountries.length;
     const end = start + 3;
-
     setTimeout(() => {
       setVisibleCountries((prev) => [...prev, ...countries.slice(start, end)]);
-      setLoading(false);
+      setLoadingMore(false);
     }, 1000);
-  };
+  }, [loadingMore, visibleCountries, countries]);
+
+  const lastCountryElementRef = useCallback(
+    (node) => {
+      if (loadingMore) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreCountries();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loadingMore, loadMoreCountries]
+  );
 
   return (
-    <InfiniteScroll
-      dataLength={visibleCountries.length}
-      next={loadMoreCountries}
-      hasMore={visibleCountries.length < countries.length}
-      loader={
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mt-10">
+      {loading
+        ? Array(9)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index} className="p-4">
+                <Skeleton height={200} className="rounded-lg" />
+                <Skeleton height={24} className="mt-2" />
+              </div>
+            ))
+        : visibleCountries.map((country, index) => (
+            <Link
+              to={`/country/${country.name.common.toLowerCase()}`}
+              key={country.cca3}
+              ref={
+                index === visibleCountries.length - 1
+                  ? lastCountryElementRef
+                  : null
+              }
+            >
+              <div className="cursor-pointer">
+                <div
+                  className="relative w-full"
+                  style={{ paddingBottom: "56.25%" }}
+                >
+                  <img
+                    src={country.flags.svg}
+                    alt={`${country.name.common} flag`}
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                    style={{
+                      boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+                    }}
+                  />
+                </div>
+                <h3 className="text-lg mt-2 text-left font-poppins font-normal">
+                  {country.name.common}
+                </h3>
+              </div>
+            </Link>
+          ))}
+      {loadingMore && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           {Array(3)
             .fill(0)
@@ -54,37 +106,8 @@ const CountryGrid = ({ searchActive, searchResults }) => {
               </div>
             ))}
         </div>
-      }
-      endMessage={<p className="text-center">All countries loaded!</p>}
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mt-10">
-        {(searchActive ? searchResults : visibleCountries).map((country) => (
-          <Link
-            to={`/country/${country.name.common.toLowerCase()}`}
-            key={country.cca3}
-          >
-            <div className="cursor-pointer">
-              <div
-                className="relative w-full"
-                style={{ paddingBottom: "56.25%" }}
-              >
-                <img
-                  src={country.flags.svg}
-                  alt={`${country.name.common} flag`}
-                  className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
-                  style={{
-                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
-                  }}
-                />
-              </div>
-              <h3 className="text-lg mt-2 text-left font-poppins font-normal">
-                {country.name.common}
-              </h3>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </InfiniteScroll>
+      )}
+    </div>
   );
 };
 
