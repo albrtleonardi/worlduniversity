@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BannerCarousel from "../components/BannerCarousel";
 import SearchOverlay from "../components/SearchOverlay";
 import CountryGrid from "../components/CountryGrid";
@@ -9,6 +9,9 @@ const CountrySearch = () => {
   const [loading, setLoading] = useState(true);
   const [searchActive, setSearchActive] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(false);
+  const bannerRef = useRef(null);
+  const searchButtonRef = useRef(null);
+
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -35,34 +38,37 @@ const CountrySearch = () => {
       threshold: 0,
     });
 
-    const target = document.querySelector("#carousel-end");
-    if (target) {
-      observer.observe(target);
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
     }
 
     return () => {
-      if (target) {
-        observer.unobserve(target);
+      if (bannerRef.current) {
+        observer.unobserve(bannerRef.current);
       }
     };
   }, []);
 
   return (
     <div>
-      <BannerCarousel />
-      <div id="carousel-end"></div>
+      <div ref={bannerRef}>
+        <BannerCarousel />
+      </div>
 
-      {showSearchIcon && (
-        <div className="fixed bottom-4 right-4 z-30">
-          <button
-            onClick={toggleSearch}
-            className="p-4 bg-white rounded-full shadow-lg flex items-center space-x-2"
-          >
-            <FiSearch size={24} />
-            <span className="text-lg font-medium">Search Country</span>
-          </button>
-        </div>
-      )}
+      <div
+        ref={searchButtonRef}
+        className={`${
+          showSearchIcon ? "sticky top-4" : ""
+        } flex justify-center my-4 z-30`}
+      >
+        <button
+          onClick={toggleSearch}
+          className="p-4 bg-white rounded-full shadow-lg flex items-center space-x-2"
+        >
+          <FiSearch size={24} />
+          <span className="text-lg font-medium">Search Country</span>
+        </button>
+      </div>
 
       <SearchOverlay
         searchActive={searchActive}

@@ -92,6 +92,15 @@ const CountryGrid = () => {
                 <h3 className="text-lg mt-2 text-left font-poppins font-normal">
                   {country.name.common}
                 </h3>
+                <p className="text-sm text-left text-gray-600 font-inter font-light">
+                  Region: {country.region}
+                </p>
+                <p className="text-sm text-left text-gray-600 font-inter font-light">
+                  Languages: {Object.values(country.languages || {}).join(", ")}
+                </p>
+                <p className="text-sm text-left text-gray-600 font-inter font-light">
+                  Independent: {country.independent ? "Yes" : "No"}
+                </p>
               </div>
             </Link>
           ))}

@@ -52,11 +52,11 @@ const SearchOverlay = ({ searchActive, toggleSearch, countries }) => {
   return (
     searchActive && (
       <div
-        className="fixed inset-0 bg-black bg-opacity-75 z-40 flex items-center justify-center"
+        className="fixed inset-0 bg-black bg-opacity-75 z-40 flex items-center justify-center p-4"
         onClick={toggleSearch}
       >
         <div
-          className="bg-white p-6 rounded-2xl font-poppins max-w-md w-full"
+          className="bg-white p-6 rounded-2xl font-poppins w-full max-w-lg mx-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center space-x-4">
