@@ -4,10 +4,12 @@ import React, {
   useEffect,
   useCallback,
   forwardRef,
+  useMemo,
 } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import _ from "lodash";
+import axios from "axios";
 
 const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
   const [countries, setCountries] = useState([]);
@@ -20,15 +22,16 @@ const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
   const [independent, setIndependent] = useState("");
   const observer = useRef(null);
 
-  useEffect(() => {
-    fetchCountries();
+  const getUniqueRegions = useCallback((countriesData) => {
+    const allRegions = countriesData.map((country) => country.region);
+    return Array.from(new Set(allRegions)).filter(Boolean);
   }, []);
 
-  const fetchCountries = async () => {
+  const fetchCountries = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const data = await response.json();
+      const response = await axios.get("https://restcountries.com/v3.1/all");
+      const data = response.data;
       setCountries(data);
       setRegions(getUniqueRegions(data));
       setVisibleCountries(data.slice(0, 27));
@@ -37,12 +40,11 @@ const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [getUniqueRegions]);
 
-  const getUniqueRegions = (countriesData) => {
-    const allRegions = countriesData.map((country) => country.region);
-    return Array.from(new Set(allRegions)).filter(Boolean);
-  };
+  useEffect(() => {
+    fetchCountries();
+  }, [fetchCountries]);
 
   const filterCountries = useCallback(
     (countriesData, region, language, independent) => {
@@ -75,9 +77,9 @@ const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
     []
   );
 
-  const debouncedFilterCountries = useCallback(
-    _.debounce(filterCountries, 300),
-    []
+  const debouncedFilterCountries = useMemo(
+    () => _.debounce(filterCountries, 300),
+    [filterCountries]
   );
 
   const handleFilterChange = useCallback(
@@ -95,7 +97,7 @@ const CountryGridFilter = forwardRef(({ isFilterVisible }, ref) => {
         setLoading(false);
       }
     },
-    [countries, debouncedFilterCountries]
+    [countries, fetchCountries, debouncedFilterCountries]
   );
 
   const handleRegionChange = (e) => {

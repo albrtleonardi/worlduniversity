@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const PopularCountriesSection = () => {
   const [popularCountries, setPopularCountries] = useState([]);
@@ -7,12 +8,15 @@ const PopularCountriesSection = () => {
 
   useEffect(() => {
     const fetchPopularCountries = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const data = await response.json();
-      const sortedCountries = data
-        .filter((country) => country.population)
-        .sort((a, b) => b.population - a.population);
-      setPopularCountries(sortedCountries.slice(0, 5));
+      try {
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        const sortedCountries = response.data
+          .filter((country) => country.population)
+          .sort((a, b) => b.population - a.population);
+        setPopularCountries(sortedCountries.slice(0, 5));
+      } catch (error) {
+        console.error("Error fetching popular countries:", error);
+      }
     };
     fetchPopularCountries();
   }, []);

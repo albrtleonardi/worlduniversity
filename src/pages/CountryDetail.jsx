@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import axios from "axios";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -23,11 +24,10 @@ const CountryDetail = () => {
   useEffect(() => {
     const fetchCountryDetails = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://restcountries.com/v3.1/name/${name}`
         );
-        const data = await response.json();
-        setCountry(data[0]);
+        setCountry(response.data[0]);
       } catch (error) {
         console.error("Error fetching country details:", error);
       }

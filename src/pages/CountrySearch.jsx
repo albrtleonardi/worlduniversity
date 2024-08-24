@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import BannerCarousel from "../components/BannerCarousel";
 import SearchOverlay from "../components/SearchOverlay";
 import CountryGrid from "../components/CountryGrid";
@@ -19,10 +20,14 @@ const CountrySearch = () => {
 
   const fetchCountries = async () => {
     setLoading(true);
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    const data = await response.json();
-    setCountries(data);
-    setLoading(false);
+    try {
+      const response = await axios.get("https://restcountries.com/v3.1/all");
+      setCountries(response.data);
+    } catch (error) {
+      console.error("Error fetching countries:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const toggleSearch = () => {
@@ -39,13 +44,15 @@ const CountrySearch = () => {
       threshold: 0,
     });
 
-    if (bannerRef.current) {
-      observer.observe(bannerRef.current);
+    const currentBannerRef = bannerRef.current;
+
+    if (currentBannerRef) {
+      observer.observe(currentBannerRef);
     }
 
     return () => {
-      if (bannerRef.current) {
-        observer.unobserve(bannerRef.current);
+      if (currentBannerRef) {
+        observer.unobserve(currentBannerRef);
       }
     };
   }, []);

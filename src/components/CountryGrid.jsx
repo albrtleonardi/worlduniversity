@@ -1,8 +1,7 @@
-// Skeletal effectnya gak jalan T^T
-
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import axios from "axios";
 
 const CountryGrid = () => {
   const [countries, setCountries] = useState([]);
@@ -18,10 +17,9 @@ const CountryGrid = () => {
   const fetchCountries = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const data = await response.json();
-      setCountries(data);
-      setVisibleCountries(data.slice(0, 27));
+      const response = await axios.get("https://restcountries.com/v3.1/all");
+      setCountries(response.data);
+      setVisibleCountries(response.data.slice(0, 27));
     } catch (error) {
       console.error("Error fetching countries:", error);
     } finally {

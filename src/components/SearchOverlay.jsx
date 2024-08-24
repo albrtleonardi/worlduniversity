@@ -1,12 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const SearchOverlay = ({ searchActive, toggleSearch, countries }) => {
+const SearchOverlay = ({ searchActive, toggleSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const [countries, setCountries] = useState([]);
   const navigate = useNavigate();
   const resultsRef = useRef(null);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        setCountries(response.data);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 
   useEffect(() => {
     if (searchQuery) {

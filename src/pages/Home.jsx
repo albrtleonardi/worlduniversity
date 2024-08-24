@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Slider from "react-slick";
+import axios from "axios";
 import HeroSection from "../components/HeroSection";
 import HistorySection from "../components/HistorySection";
 import ExploreNowSection from "../components/ExploreNowSection";
@@ -15,9 +15,12 @@ const Home = () => {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const data = await response.json();
-      setTotalOfTheCountries(data.length);
+      try {
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        setTotalOfTheCountries(response.data.length);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
     };
     fetchCountries();
   }, []);

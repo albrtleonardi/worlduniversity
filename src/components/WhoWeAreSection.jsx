@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const WhoWeAreSection = () => {
+  const navigate = useNavigate();
+
+  const handleAbout = () => {
+    navigate("/about");
+  };
+
   return (
     <div className="flex flex-col md:flex-row w-full h-auto md:h-[70%] justify-center items-center pl-4 md:pl-16 pr-4 md:pr-16 space-y-4 md:space-y-0 mt-16 md:mt-12 mb-12 md:space-x-8">
       <div className="flex flex-col justify-center items-center">
@@ -16,7 +23,10 @@ const WhoWeAreSection = () => {
           awareness and connection. Through knowledge, we aim to build a more
           informed and interconnected world.
         </p>
-        <button className="md:w-60 w-full p-2 border rounded-full border-black mt-4 transition-all duration-300 ease-in-out hover:bg-black hover:text-white relative overflow-hidden md:mb-0 mb-6">
+        <button
+          onClick={handleAbout}
+          className="md:w-60 w-full p-2 border rounded-full border-black mt-4 transition-all duration-300 ease-in-out hover:bg-black hover:text-white relative overflow-hidden md:mb-0 mb-6"
+        >
           <span className="block">About us</span>
         </button>
       </div>
