@@ -2,16 +2,22 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-5">
-      <div className="flex-1">
-        <h2 className="text-4xl font-bold mb-4">Let's Talk</h2>
-        <p className="text-lg leading-relaxed text-gray-700">
-          We’d love to hear from you! Whether you have a question about
-          features, trials, pricing, need a demo, or anything else, our team is
-          ready to answer all your questions.
+    <div className="min-h-screen flex flex-col md:flex-row items-center justify-center p-5 md:pl-12 md:mt-0 mt-12">
+      <div className="flex-1 mb-8 md:mb-0 md:mr-8">
+        <h2 className="text-4xl font-normal font-poppins mb-4 text-center md:text-left">
+          Let's Talk
+        </h2>
+        <p className="text-base leading-relaxed text-gray-700 w-full md:w-96 font-inter text-center md:text-left">
+          We’d love to hear from you! Whether you have questions about features,
+          trials, pricing, or if you’re interested in scheduling a demo, or just
+          want to learn more about our offerings, our team is here and ready to
+          assist. No matter what your inquiry might be, we’re committed to
+          providing you with the information you need. Don’t hesitate to reach
+          out—we’re eager to answer all your questions and help you make the
+          most of our services.
         </p>
       </div>
-      <div className="w-full max-w-xl bg-white border border-black rounded-lg p-8 md:p-12 flex flex-col md:flex-row gap-8">
+      <div className="w-full max-w-xl bg-white border border-black rounded-lg p-8 md:p-12 flex flex-col gap-8 font-poppins">
         <div className="flex-1">
           <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
           <form className="space-y-6">

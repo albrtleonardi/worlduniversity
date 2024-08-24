@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import BannerCarouselFilter from "../components/BannerCarouselFilter";
 import CountryGridFilter from "../components/CountryGridFilter";
+import Footer from "../components/Footer";
 
 const FilterCountry = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -36,6 +37,7 @@ const FilterCountry = () => {
         <BannerCarouselFilter />
       </div>
       <CountryGridFilter isFilterVisible={isFilterVisible} />
+      <Footer />
     </div>
   );
 };

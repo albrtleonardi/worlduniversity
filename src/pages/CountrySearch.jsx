@@ -3,6 +3,7 @@ import BannerCarousel from "../components/BannerCarousel";
 import SearchOverlay from "../components/SearchOverlay";
 import CountryGrid from "../components/CountryGrid";
 import { FiSearch } from "react-icons/fi";
+import Footer from "../components/Footer";
 
 const CountrySearch = () => {
   const [countries, setCountries] = useState([]);
@@ -77,6 +78,7 @@ const CountrySearch = () => {
       />
 
       <CountryGrid countries={countries} loading={loading} />
+      <Footer />
     </div>
   );
 };
